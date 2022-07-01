@@ -14,7 +14,7 @@ const PosterDisplay = ({ type, limit }) => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/${type}`)
+    fetch(`http://localhost:${process.env.PORT || 8000}/${type}`)
       .then((res) => res.json())
       .then((data) => {
         const limitedData = data.slice(0, limit);

@@ -8,7 +8,7 @@ const Details = () => {
   const [item, setItem] = useState({});
 
   useEffect(() => {
-    fetch(`http://localhost:8000/${type}?id=${id}`)
+    fetch(`http://localhost:${process.env.PORT || 8000}/${type}?id=${id}`)
       .then((res) => res.json())
       .then((data) => setItem(data[0]));
   }, [type, id]);
