@@ -8,5 +8,5 @@ server.use(middleware);
 server.use(router);
 
 server.listen(port, () =>
-  console.log(`Successfully started server on port: ${port}`)
+  console.log(`Successfullyyyyy started server on port: ${port}`)
 );
