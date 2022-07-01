@@ -5,7 +5,7 @@ import { Slide } from "react-slideshow-image";
 
 import "react-slideshow-image/dist/styles.css";
 
-const Hero = ({arrows}) => {
+const Hero = ({ arrows }) => {
   const properties = {
     duration: 5000,
     transitionDuration: 300,
@@ -17,9 +17,14 @@ const Hero = ({arrows}) => {
   const [banners, setBanners] = useState([]);
 
   useState(() => {
-    fetch(`http://localhost:${process.env.PORT || 8000}/${arrows ? "banners" : "content"}`)
+    fetch(
+      `http://localhost:${process.env.PORT || 8000}/${
+        arrows ? "banners" : "content"
+      }`
+    )
       .then((res) => res.json())
-      .then((data) => setBanners(data));
+      .then((data) => setBanners(data))
+      .catch((err) => console.log(err));
   }, []);
 
   return (

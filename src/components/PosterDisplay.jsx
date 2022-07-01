@@ -19,7 +19,8 @@ const PosterDisplay = ({ type, limit }) => {
       .then((data) => {
         const limitedData = data.slice(0, limit);
         setItems(limitedData);
-      });
+      })
+      .catch((err) => console.log(err));
   }, [type, limit]);
 
   return (
