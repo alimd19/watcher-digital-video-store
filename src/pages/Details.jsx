@@ -8,7 +8,7 @@ const Details = () => {
   const [item, setItem] = useState({});
 
   useEffect(() => {
-    fetch(`http://localhost:8000/${type}?id=${id}`)
+    fetch(`/${type}?id=${id}`)
       .then((res) => res.json())
       .then((data) => setItem(data[0]))
       .catch((err) => console.log(err));

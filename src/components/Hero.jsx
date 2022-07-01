@@ -17,7 +17,7 @@ const Hero = ({ arrows }) => {
   const [banners, setBanners] = useState([]);
 
   useState(() => {
-    fetch(`http://localhost:8000/${arrows ? "banners" : "content"}`)
+    fetch(`/${arrows ? "banners" : "content"}`)
       .then((res) => res.json())
       .then((data) => setBanners(data))
       .catch((err) => console.log(err));
