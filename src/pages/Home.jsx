@@ -7,9 +7,9 @@ const Home = () => {
   return (
     <>
       <Hero arrows={true} />
-      <PosterDisplay type="movie" limit={6} />
+      <PosterDisplay type="movie" limit={6} name=""/>
       <Divider sx={{ mt: 3 }} />
-      <PosterDisplay type="show" limit={6} />
+      <PosterDisplay type="show" limit={6} name=""/>
       <Divider sx={{ my: 2 }} />
       <Hero />
       <Divider sx={{ my: 2 }} />

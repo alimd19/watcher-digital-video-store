@@ -10,15 +10,15 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const PosterDisplay = ({ type, limit }) => {
+const PosterDisplay = ({ type, limit, name }) => {
   const navigate = useNavigate();
   const [items, setItems] = useState([]);
 
   useEffect(() => {
     axios
-      .get(`https://watcher-dvs-backend.herokuapp.com/videos?featured=true&type=${type}`)
+      .get(`https://watcher-dvs-backend.herokuapp.com/videos?featured=true&type=${type}&name=${name}`)
       .then((res) => setItems(res.data.body.slice(0, limit)));
-  }, [type, limit]);
+  }, [type, limit, name]);
 
   const display = type === "movie" ? "Movies" : "Shows";
 

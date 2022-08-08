@@ -20,7 +20,7 @@ const Hero = ({ arrows }) => {
   useState(() => {
     axios
       .get(
-        `http://localhost:5000/banners?type=${arrows ? "banner" : "content"}`
+        `https://watcher-dvs-backend.herokuapp.com/banners?type=${arrows ? "banner" : "content"}`
       )
       .then((res) => setBanners(res.data.body));
   }, []);
