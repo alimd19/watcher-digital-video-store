@@ -13,7 +13,7 @@ export const useSignup = () => {
     setSignupError(null);
 
     axios
-      .post("http://localhost:5000/auth/signup", user)
+      .post("https://watcher-dvs-backend.herokuapp.com/auth/signup", user)
       .then((res) => {
         const user = res.data.body[0];
         localStorage.setItem("user", JSON.stringify(user));

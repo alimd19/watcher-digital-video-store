@@ -13,7 +13,7 @@ export const useLogin = () => {
     setLoginError(null);
 
     axios
-      .post("http://localhost:5000/auth/login", new URLSearchParams(user), {
+      .post("https://watcher-dvs-backend.herokuapp.com/auth/login", new URLSearchParams(user), {
         headers: { "Access-Control-Allow-Origin": "*" },
       })
       .then((res) => {

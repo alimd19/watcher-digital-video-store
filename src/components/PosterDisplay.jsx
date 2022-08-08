@@ -16,7 +16,7 @@ const PosterDisplay = ({ type, limit }) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/videos?featured=true&type=${type}`)
+      .get(`https://watcher-dvs-backend.herokuapp.com/videos?featured=true&type=${type}`)
       .then((res) => setItems(res.data.body.slice(0, limit)));
   }, [type, limit]);
 

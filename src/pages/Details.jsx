@@ -10,7 +10,7 @@ const Details = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/video/${id}`)
+      .get(`https://watcher-dvs-backend.herokuapp.com/video/${id}`)
       .then((res) => setItem(res.data.body[0]));
   }, [id]);
 
