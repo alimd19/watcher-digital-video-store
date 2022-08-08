@@ -1,11 +1,37 @@
-import { AppBar, Button, Toolbar, Typography, Grid } from "@mui/material";
+import {
+  AppBar,
+  Button,
+  Menu,
+  MenuItem,
+  Toolbar,
+  Typography,
+  Grid,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import React from "react";
 
 import logo from "../logo.png";
+import { useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
+import { useLogout } from "../hooks/useLogout";
 
 const NavBar = ({ showModal }) => {
   const navigate = useNavigate();
+
+  const { user } = useContext(UserContext);
+  const { logout } = useLogout();
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    logout();
+    setAnchorEl(null);
+  };
 
   return (
     <AppBar>
@@ -52,20 +78,46 @@ const NavBar = ({ showModal }) => {
             direction="row"
             justifyContent="end"
           >
-            <Button
-              variant="text"
-              sx={{ color: "white" }}
-              onClick={() => showModal("signup")}
-            >
-              Signup
-            </Button>
-            <Button
-              variant="text"
-              sx={{ color: "white" }}
-              onClick={() => showModal("login")}
-            >
-              Login
-            </Button>
+            {user.username ? (
+              <>
+                <Typography
+                  onClick={handleClick}
+                  variant="h6"
+                  component="span"
+                  sx={{ px: 1 }}
+                >
+                  {user.username}
+                </Typography>
+                <Menu
+                  id="basic-menu"
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleClose}
+                  MenuListProps={{
+                    "aria-labelledby": "basic-button",
+                  }}
+                >
+                  <MenuItem onClick={handleClose}>Logout</MenuItem>
+                </Menu>
+              </>
+            ) : (
+              <>
+                <Button
+                  variant="text"
+                  sx={{ color: "white" }}
+                  onClick={() => showModal("signup")}
+                >
+                  Signup
+                </Button>
+                <Button
+                  variant="text"
+                  sx={{ color: "white" }}
+                  onClick={() => showModal("login")}
+                >
+                  Login
+                </Button>
+              </>
+            )}
           </Grid>
         </Grid>
       </Toolbar>

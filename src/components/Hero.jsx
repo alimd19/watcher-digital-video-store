@@ -2,6 +2,7 @@ import { Card, CardMedia } from "@mui/material";
 import React from "react";
 import { useState } from "react";
 import { Slide } from "react-slideshow-image";
+import axios from "axios";
 
 import "react-slideshow-image/dist/styles.css";
 
@@ -17,10 +18,11 @@ const Hero = ({ arrows }) => {
   const [banners, setBanners] = useState([]);
 
   useState(() => {
-    fetch(`/${arrows ? "banners" : "content"}`)
-      .then((res) => res.json())
-      .then((data) => setBanners(data))
-      .catch((err) => console.log(err));
+    axios
+      .get(
+        `http://localhost:5000/banners?type=${arrows ? "banner" : "content"}`
+      )
+      .then((res) => setBanners(res.data.body));
   }, []);
 
   return (

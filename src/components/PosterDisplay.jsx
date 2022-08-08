@@ -8,20 +8,19 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const PosterDisplay = ({ type, limit }) => {
   const navigate = useNavigate();
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    fetch(`/${type}`)
-      .then((res) => res.json())
-      .then((data) => {
-        const limitedData = data.slice(0, limit);
-        setItems(limitedData);
-      })
-      .catch((err) => console.log(err));
+    axios
+      .get(`http://localhost:5000/videos?featured=true&type=${type}`)
+      .then((res) => setItems(res.data.body.slice(0, limit)));
   }, [type, limit]);
+
+  const display = type === "movie" ? "Movies" : "Shows";
 
   return (
     <Box component="div" sx={{ m: 2 }}>
@@ -31,18 +30,18 @@ const PosterDisplay = ({ type, limit }) => {
         textAlign="center"
         sx={{ my: 2 }}
       >
-        {limit ? `Featured ${type}` : `Our Library of ${type}`}
+        {limit ? `Featured ${display}` : `Our Library of ${display}`}
       </Typography>
 
       <Grid container spacing={3}>
         {items.map((item) => (
-          <Grid item xs={4} md={2} key={item.rank}>
+          <Grid item xs={4} md={2} key={item.id}>
             <Card
               sx={{ maxWidth: 200 }}
               onClick={() => navigate(`/${type}/details/${item.id}`)}
             >
               <CardActionArea>
-                <CardMedia component="img" image={item.image} />
+                <CardMedia component="img" image={item.smallPoster} />
               </CardActionArea>
             </Card>
           </Grid>
